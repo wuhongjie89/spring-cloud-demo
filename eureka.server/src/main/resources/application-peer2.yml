@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eureka-server-demo
+
+server:
+  port: ${PORT:8762}
+
+eureka:
+  instance:
+    hostname: peer2
+    metadata-map:
+      zone: zone2
+  client:
+    service-url:
+      default-zone: http:localhost:8761/eureka/,http://localhost:8763/eureka/
+
