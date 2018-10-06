@@ -3,6 +3,7 @@
 /*/target/*
 .mvn/*
 mvnw*
+/logs/*
 
 ### STS ###
 .apt_generated
