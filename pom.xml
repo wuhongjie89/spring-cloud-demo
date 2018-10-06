@@ -9,7 +9,8 @@
 	<modules>
 		<module>eureka.server</module>
 		<module>eureka.client</module>
-	</modules>
+        <module>config.server</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>spring-demo</name>
