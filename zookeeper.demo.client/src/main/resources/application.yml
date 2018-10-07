@@ -1,0 +1,15 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: zookeeper-client
+  cloud:
+    zookeeper:
+      discovery:
+#        root: /spring-cloud-client
+        enabled: true
+        register: true
+      connect-string: localhost:2181
+
+

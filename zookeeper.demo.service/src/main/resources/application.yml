@@ -1,0 +1,15 @@
+server:
+  port: 9080
+
+spring:
+  application:
+    name: zookeeper-service
+  cloud:
+    zookeeper:
+      discovery:
+#        root: /spring-cloud-service
+        enabled: true
+        register: true
+      connect-string: localhost:2181
+
+

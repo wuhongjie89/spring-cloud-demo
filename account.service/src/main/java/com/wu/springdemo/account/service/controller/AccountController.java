@@ -42,13 +42,17 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public Account findById(@PathVariable("id") Long id) {
-        return repository.findById(id);
+    public Account findById(@PathVariable("id") Long id) throws JsonProcessingException {
+        Account account = repository.findById(id);
+        LOGGER.info("Account found: {}", mapper.writeValueAsString(account));
+        return account;
     }
 
     @GetMapping("/customer/{customerId}")
-    public List<Account> findByCustomerId(@PathVariable("customerId") Long customerId) {
-        return repository.findByCustomer(customerId);
+    public List<Account> findByCustomerId(@PathVariable("customerId") Long customerId) throws JsonProcessingException {
+        List<Account> accounts = repository.findByCustomer(customerId);
+        LOGGER.info("Account found: {}", mapper.writeValueAsString(accounts));
+        return accounts;
     }
 
     @PostMapping("/ids")

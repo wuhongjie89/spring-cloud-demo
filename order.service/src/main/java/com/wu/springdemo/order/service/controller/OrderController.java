@@ -13,7 +13,6 @@ import com.wu.springdemo.order.service.model.Product;
 import com.wu.springdemo.order.service.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,14 +31,18 @@ public class OrderController {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    private final OrderRepository repository;
+    private final AccountClient accountClient;
+    private final CustomerClient customerClient;
+    private final ProductClient productClient;
+
     @Autowired
-    OrderRepository repository;
-    @Autowired
-    AccountClient accountClient;
-    @Autowired
-    CustomerClient customerClient;
-    @Autowired
-    ProductClient productClient;
+    public OrderController(OrderRepository repository, AccountClient accountClient, CustomerClient customerClient, ProductClient productClient) {
+        this.repository = repository;
+        this.accountClient = accountClient;
+        this.customerClient = customerClient;
+        this.productClient = productClient;
+    }
 
     @PostMapping
     public Order prepare(@RequestBody Order order) throws JsonProcessingException {
@@ -63,7 +65,7 @@ public class OrderController {
             order.setStatus(OrderStatus.REJECTED);
             LOGGER.info("Account not found: {}", mapper.writeValueAsString(customer.getAccounts()));
         }
-        Map<String, String> m = MDC.getCopyOfContextMap();
+//        Map<String, String> m = MDC.getCopyOfContextMap();
         return repository.add(order);
     }
 
